@@ -1,0 +1,7 @@
+<!--
+ - Created by Serhii Rudkov on 07.01.2019.
+ -->
+
+<aura:event type="COMPONENT" description="EventBoat">
+    <aura:attribute name="boatTypeName" type="String"/>
+</aura:event>

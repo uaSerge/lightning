@@ -1,0 +1,7 @@
+<!--
+ - Created by Serhii Rudkov on 08.01.2019.
+ -->
+
+<aura:event type="COMPONENT" description="BoatSelect">
+    <aura:attribute name="boatId" type="String"/>
+</aura:event>

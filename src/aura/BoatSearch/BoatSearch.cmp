@@ -1,0 +1,22 @@
+<!--
+ - Created by Serhii Rudkov on 07.01.2019.
+ -->
+
+<aura:component description="BoatSearch" implements="flexipage:availableForAllPageTypes,force:hasRecordId"
+                access="global">
+    <aura:handler name="FormSubmit" event="c:FormSubmit" action="{!c.onFormSubmit}"/>
+    
+    <div style="margin-bottom: 10px;">
+        <lightning:layoutItem size="12">
+            <lightning:card title="Find a Boat">
+                <c:BoatSearchForm/>
+            </lightning:card>
+        </lightning:layoutItem>
+    </div>
+    <lightning:layoutItem size="12">
+        <lightning:card title="Matching Boats">
+            <c:BoatSearchResults  aura:id="boatSearchResults"/>
+        </lightning:card>
+    </lightning:layoutItem>
+    
+</aura:component>

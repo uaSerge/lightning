@@ -1,0 +1,36 @@
+<!--
+ - Created by Serhii Rudkov on 08.01.2019.
+ -->
+
+<aura:component description="BoatDetails" implements="flexipage:availableForAllPageTypes,force:hasRecordId"
+                access="global">
+    <aura:attribute name="id" type="Id"/>
+    <aura:attribute name="boat" type="Boat__c"/>
+    <aura:attribute name="selectedTabId" type="String" default="details"/>
+    <aura:handler event="c:BoatSelected" action="{!c.onBoatSelected}"/>
+    <aura:handler event="c:BoatReviewAdded" name="BoatReviewAdded" action="{!c.onBoatReviewAdded}"/>
+    
+    <force:recordData aura:id="service"
+                      layoutType="FULL"
+                      recordId="{!v.id}"
+                      targetError="{!v.recordError}"
+                      targetFields="{!v.boat}"
+                      fields="Id,Name,Description__c,Price__c,Length__c,Contact__r.Name,Contact__r.Email,Contact__r.HomePhone,BoatType__r.Name,Picture__c"
+                      mode="EDIT"
+                      recordUpdated="{!c.onRecordUpdated}"
+    />
+    
+    <aura:if isTrue="{!!empty(v.boat)}">
+        <lightning:tabset aura:id="tab" selectedTabId="{!v.selectedTabId}">
+            <lightning:tab label="Details" id="details">
+                <c:BoatDetail boat = "{!v.boat}"/>
+            </lightning:tab>
+            <lightning:tab label="Reviews" id="reviews">
+            <c:BoatReviews aura:id = "boatReviews"  boat = "{!v.boat}"/>
+            </lightning:tab>
+            <lightning:tab label="Add Reviews" id="addReviews" onactive="{!c.onAddReviews}">
+                <c:AddBoatReview  boat = "{!v.boat}"/>
+            </lightning:tab>
+        </lightning:tabset>
+    </aura:if>
+</aura:component>

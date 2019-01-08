@@ -1,0 +1,31 @@
+<!--
+ - Created by Serhii Rudkov on 07.01.2019.
+ -->
+
+<aura:component description="BoatSearchForm" controller="BoatController">
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:attribute name="boatTypes" type="BoatType__c"/>
+    <aura:attribute name="IsCreateRecord" type="Boolean" default="false"/>
+    <aura:attribute name="boatTypeId" type="String"/>
+    <aura:registerEvent name="FormSubmit" type="c:FormSubmit"/>
+    
+    <lightning:layout class="slds-grid slds-grid--align-center" horizontalAlign="center" multipleRows="true">
+        <lightning:layoutItem class="slds-col" flexibility="auto" padding="5" size="3">
+            <lightning:select class="slds-align_absolute-center" name="selectBoatType" value="{!v.boatTypeId}" label="">
+                <option value=""></option>
+                <aura:iteration items="{!v.boatTypes}" var="type">
+                    <option value="{!type.Id}" text="{!type.Name}"/>
+                </aura:iteration>
+                <option value="">All types</option>
+            </lightning:select>
+        </lightning:layoutItem>
+        <lightning:layoutItem class="slds-col slds-align_absolute-center" flexibility="shrink" size="2">
+            <lightning:button class="slds-grid--align-center" title="Search" label="Search" type="button"
+                              variant="brand" onclick="{!c.onFormSubmit}"/>
+            <aura:if isTrue="{!v.IsCreateRecord}">
+            <lightning:button class="slds-grid--align-center" title="New" label="New" type="button" variant="neutral"
+                              onclick="{!c.newBoat}"/>
+            </aura:if>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>
